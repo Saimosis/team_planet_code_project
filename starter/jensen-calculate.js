@@ -1,15 +1,29 @@
 // Import the prompt-sync library to handle user input
-const prompt = require('prompt-sync')
+const prompt = require('prompt-sync')();
 // Import the gravityFactors module which contains factors for different planets
-const gravityFactors = require("./gravityFactors")
+const gravityFactors = require("./utils/earthGravityFactors.js")
 // Define a function to show user factors based on input type and value
 
-function something(inputValue) {
-    let results = {};
-    for (let something in gravityFactors) {
-        results = parseFloat((inputValue * gravityFactors[something]).toFixed(2))
+function showUserFactors(factorType, factorUnit) {
+    console.log(gravityFactors);
+    const factors = {};
+    let measurement;
+    for (let planet in gravityFactors) {
+        factors[planet] = parseFloat((factorUnit * gravityFactors[planet]).toFixed(2));
     }
+    switch (factorType) {
+        case 'jump':
+            measurement = 'cm';
+            break;
+        case 'weight':
+            measurement = 'kg';
+            break;
+        default:
+            measurment = 'units'
+    }
+    console.log(factors)
 }
+console.log(showUserFactors('jump', 5));
 // Initialize an object to hold the results
 // Declare a variable to hold the unit of measurement
 // Iterate over each item in the gravityFactors object

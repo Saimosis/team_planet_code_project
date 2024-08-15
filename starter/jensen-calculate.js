@@ -6,18 +6,21 @@ const alien = require("./utils/alienGravityFactors.js");
 const alienGravityFactors = require("./utils/alienGravityFactors.js")
 // Define a function to show user factors based on input type and value
 
-function showUserFactors(factorType, factorUnit, factorPlanet) {
+function showUserFactors(factorType, factorSystem, factorUnit, factorPlanet) {
     // console.log(gravityFactors);
     const factors = {};
     let measurement;
-    let planet;
+    let userPlanet;
+    let system
     switch (factorType) {
         case 'jump':
-            measurement = 'cm';
+            measurement = factorSystem;
             break;
         case 'weight':
-            measurement = 'kg';
+            measurement = factorSystem;
             break;
+        case 'pushups':
+            measurement = 'reps';
         default:
             measurment = 'units'
     }
@@ -31,6 +34,16 @@ function showUserFactors(factorType, factorUnit, factorPlanet) {
         default:
             userPlanet = 'planets'
     }
+    switch (factorSystem) {
+        case 'metric':
+            system = something;
+            break;
+        case 'imperial':
+            system = something;
+            break;
+        default:
+            something = something;    
+    }
     for (let planet in userPlanet) {
         factors[planet] = parseFloat((factorUnit * userPlanet[planet]).toFixed(2));
     }
@@ -40,15 +53,17 @@ function showUserFactors(factorType, factorUnit, factorPlanet) {
      }
 }
 function getUserInput() {
-    console.log("what would you like to measure (jump, weight)");
+    console.log("what would you like to measure (jump, weight, pushups)");
     const factorType = prompt(">");
+    console.log("How would you like to measure it? (metric, imperial)")
+    const factorSystem = prompt(">");
+    console.log("how much");
+    const factorUnit = prompt('>');
     console.log("on what planet (earth, alien)");
     const factorPlanet = prompt('>');
-    console.log("how much");
-    const factorValue = prompt('>');
 
 
-    showUserFactors(factorType, factorValue, factorPlanet);
+    showUserFactors(factorType, factorSystem, factorUnit, factorPlanet);
 }
 global.getUserInput = getUserInput;
 // console.log(showUserFactors('jump', 5));

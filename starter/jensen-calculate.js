@@ -11,9 +11,6 @@ function showUserFactors(factorType, factorUnit, factorPlanet) {
     const factors = {};
     let measurement;
     let planet;
-    for (let planet in factorPlanet) {
-        factors[planet] = parseFloat((factorUnit * factorPlanet[planet]).toFixed(2));
-    }
     switch (factorType) {
         case 'jump':
             measurement = 'cm';
@@ -26,13 +23,16 @@ function showUserFactors(factorType, factorUnit, factorPlanet) {
     }
     switch (factorPlanet) {
         case 'alien':
-            planet = alien;
+            userPlanet = alien;
             break;
-        case 'earth':
-            planet = earth;
+            case 'earth':
+            userPlanet = earth;
             break;
         default:
-            planet = 'planets'
+            userPlanet = 'planets'
+    }
+    for (let planet in userPlanet) {
+        factors[planet] = parseFloat((factorUnit * userPlanet[planet]).toFixed(2));
     }
     // console.log(factors)
     for (let planet in factors) {

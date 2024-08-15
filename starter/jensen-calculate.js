@@ -64,9 +64,3 @@ global.getUserInput = getUserInput;
 // Prompt the user to enter the numerical value of the factor
 // Call the showUserFactors function with the user inputs and the gravity factors
 // Expose getUserFactors globally
-function calculateUserInput() {
-    console.log("Enter your values");
-    const userPrompt = prompt(">")
-    console.log("What do you want to calculate on different planets")
-}
-global.showUserFactors = showUserFactors;

@@ -1,15 +1,18 @@
 // Import the prompt-sync library to handle user input
 const prompt = require('prompt-sync')();
 // Import the gravityFactors module which contains factors for different planets
-const gravityFactors = require("./utils/earthGravityFactors.js")
+const earth = require("./utils/earthGravityFactors.js");
+const alien = require("./utils/alienGravityFactors.js");
+const alienGravityFactors = require("./utils/alienGravityFactors.js")
 // Define a function to show user factors based on input type and value
 
-function showUserFactors(factorType, factorUnit) {
-    console.log(gravityFactors);
+function showUserFactors(factorType, factorUnit, factorPlanet) {
+    // console.log(gravityFactors);
     const factors = {};
     let measurement;
-    for (let planet in gravityFactors) {
-        factors[planet] = parseFloat((factorUnit * gravityFactors[planet]).toFixed(2));
+    let planet;
+    for (let planet in factorPlanet) {
+        factors[planet] = parseFloat((factorUnit * factorPlanet[planet]).toFixed(2));
     }
     switch (factorType) {
         case 'jump':
@@ -21,9 +24,34 @@ function showUserFactors(factorType, factorUnit) {
         default:
             measurment = 'units'
     }
-    console.log(factors)
+    switch (factorPlanet) {
+        case 'alien':
+            planet = alien;
+            break;
+        case 'earth':
+            planet = earth;
+            break;
+        default:
+            planet = 'planets'
+    }
+    // console.log(factors)
+    for (let planet in factors) {
+        console.log(`Your ${factorType} on ${planet} is ${factors[planet]}${measurement}`);
+     }
 }
-console.log(showUserFactors('jump', 5));
+function getUserInput() {
+    console.log("what would you like to measure (jump, weight)");
+    const factorType = prompt(">");
+    console.log("on what planet (earth, alien)");
+    const factorPlanet = prompt('>');
+    console.log("how much");
+    const factorValue = prompt('>');
+
+
+    showUserFactors(factorType, factorValue, factorPlanet);
+}
+global.getUserInput = getUserInput;
+// console.log(showUserFactors('jump', 5));
 // Initialize an object to hold the results
 // Declare a variable to hold the unit of measurement
 // Iterate over each item in the gravityFactors object
@@ -41,4 +69,4 @@ function calculateUserInput() {
     const userPrompt = prompt(">")
     console.log("What do you want to calculate on different planets")
 }
-global.calculateUserInput = calculateUserInput
+global.showUserFactors = showUserFactors;

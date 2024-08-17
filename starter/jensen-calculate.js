@@ -12,12 +12,13 @@ function showUserFactors(factorType, factorSystem, factorUnit, factorPlanet) {
     let measurement;
     let userPlanet;
     let system
+    let system2
     switch (factorType) {
         case 'jump':
-            measurement = factorSystem;
+            measurement = system;
             break;
         case 'weight':
-            measurement = factorSystem;
+            measurement = system2;
             break;
         case 'pushups':
             measurement = 'reps';
@@ -36,14 +37,17 @@ function showUserFactors(factorType, factorSystem, factorUnit, factorPlanet) {
     }
     switch (factorSystem) {
         case 'metric':
-            system = something;
+            system = meters
+            system2 = kg;
             break;
         case 'imperial':
-            system = something;
+            system = inches;
+            system2 = lbs
             break;
         default:
             something = something;    
     }
+    
     for (let planet in userPlanet) {
         factors[planet] = parseFloat((factorUnit * userPlanet[planet]).toFixed(2));
     }
@@ -52,30 +56,41 @@ function showUserFactors(factorType, factorSystem, factorUnit, factorPlanet) {
         console.log(`Your ${factorType} on ${planet} is ${factors[planet]}${measurement}`);
      }
 }
+
+let validWords1 = ['jump', 'weight', 'pushups']
+let isMatch = false;
+
 function getUserInput() {
     console.log("what would you like to measure (jump, weight, pushups)");
-    const factorType = prompt(">");
+    let factorType = prompt(">");
+    factorType = factorType.toLowerCase().trim()
+    for (let i = 0; i < validWords1.length - 1; i++) {
+        if (validWords1[i] === factorType) {
+            isMatch = true;
+            break;
+        }
+    } else {
+
+    }
+    while (true) {
+        console.log("How would you like to measure it? (metric, imperial)")
+        let factorSystem = prompt(">").toLowerCase().trim();
+        factorSystem = factorSystem.toLowerCase().trim()
+        break;
+     }
+    // console.log(factorType)
     console.log("How would you like to measure it? (metric, imperial)")
-    const factorSystem = prompt(">");
+    let factorSystem = prompt(">").toLowerCase().trim();
+    factorSystem = factorSystem.toLowerCase().trim()
     console.log("how much");
-    const factorUnit = prompt('>');
+    let factorUnit = prompt('>').toLowerCase();
+    factorUnit = factorType.toLowerCase().trim()
     console.log("on what planet (earth, alien)");
-    const factorPlanet = prompt('>');
+    let factorPlanet = prompt('>').toLowerCase();
+    factorPlanet = factorPlanet.toLowerCase().trim()
 
 
     showUserFactors(factorType, factorSystem, factorUnit, factorPlanet);
+    
 }
 global.getUserInput = getUserInput;
-// console.log(showUserFactors('jump', 5));
-// Initialize an object to hold the results
-// Declare a variable to hold the unit of measurement
-// Iterate over each item in the gravityFactors object
-// Calculate the factor multiplied by the input value and round it to two decimals
-// Switch case to determine the measurement unit based on factor type
-// Iterate over the results and log each one
-
-// Define a function to get user inputs for factor type and value
-// Prompt the user to enter the type of factor they want to calculate
-// Prompt the user to enter the numerical value of the factor
-// Call the showUserFactors function with the user inputs and the gravity factors
-// Expose getUserFactors globally

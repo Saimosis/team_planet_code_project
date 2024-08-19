@@ -54,7 +54,8 @@ function showUserFactors(factorType, factorSystem, factorUnit, factorPlanet) {
     // console.log(factors)
     for (let planet in factors) {
         console.log(`Your ${factorType} on ${planet} is ${factors[planet]}${measurement}`);
-     }
+    }
+    getUserFactors();
 }
 
 let validWords1 = ['jump', 'weight', 'pushups']
@@ -64,13 +65,11 @@ function getUserInput() {
     console.log("what would you like to measure (jump, weight, pushups)");
     let factorType = prompt(">");
     factorType = factorType.toLowerCase().trim()
-    for (let i = 0; i < validWords1.length - 1; i++) {
+    for (let i = 0; i < validWords1.length; i++) {
         if (validWords1[i] === factorType) {
             isMatch = true;
             break;
         }
-    } else {
-
     }
     while (true) {
         console.log("How would you like to measure it? (metric, imperial)")
@@ -94,3 +93,4 @@ function getUserInput() {
     
 }
 global.getUserInput = getUserInput;
+getUserInput();

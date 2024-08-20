@@ -41,7 +41,11 @@ function getUserFactors() {
         }
     }
     let factorUnit = "repetitions";
-    if (factorSystem === "metric") { } else if (factorSystem === "imperial") { }
+    if (factorSystem === "metric") { } else if (factorSystem === "imperial") { 
+        switch (factorUnit) {
+            case 
+        }
+    }
     while (true) {
         break;
     }
